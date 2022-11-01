@@ -1,0 +1,9 @@
+{
+  "name": "cpuTemp",
+  "main": "index.js",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "systeminformation": "^5.12.11"
+  },
+	"private": true
+}

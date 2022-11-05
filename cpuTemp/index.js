@@ -2,13 +2,21 @@
 *
 * Copyright (c) 2022 Hugo Chen, All Rights Reserved.
 * 
-* You can use this file by following the license.
+* According to the license, you can redistribute this project.
 *
-* This file is under BSD-3-Clause License.
+* Remember to add the author information when you redistribute this project.
 *
 */
 
 const si = require('systeminformation');
+const prompt = require('prompt-sync')();
+
+const getCpuTimes = Number(prompt('請輸入欲測量的時間（以秒為單位，每 1 秒測量一次）：'));
+
+if(typeof getCpuTimes !== 'number' || !Number.isInteger(getCpuTimes)){
+	console.log('錯誤的輸入格式'); 
+	return; 
+}
 
 let avg = [];
 
@@ -17,13 +25,13 @@ async function sleep(ms = 0){
 }
 
 async function run(){
-	for(let i = 0; i < 10; i++){
+	for(var i = 0; i < getCpuTimes; i++){
 		si.cpuTemperature()
 			.then(data => console.log(data.main))
 			
 		si.cpuTemperature()
 			.then(data => avg.push(data.main))
-		
+	
 		await sleep(1000);
 	}
 	getAvg();
@@ -32,11 +40,11 @@ async function run(){
 function getAvg(){
 	let avgSum = 0;
 	
-	for(let i = 0; i < 10; i++){
+	for(let i = 0; i < getCpuTimes; i++){
 		avgSum += avg[i];
 	}
 
-	let avgResult = avgSum / 10;
+	let avgResult = avgSum / getCpuTimes;
 
 	console.log('Avarage:', avgResult);
 }

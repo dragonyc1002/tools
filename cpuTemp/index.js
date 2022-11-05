@@ -46,7 +46,7 @@ function getAvg(){
 
 	let avgResult = avgSum / getCpuTimes;
 
-	console.log('Avarage:', avgResult);
+	console.log('Average:', avgResult);
 }
 
 run();
